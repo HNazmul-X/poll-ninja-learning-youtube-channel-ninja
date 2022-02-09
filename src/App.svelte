@@ -1,15 +1,12 @@
 <script>
+    import Footer from "./Components/Footer.svelte";
     import Header from "./Components/Header.svelte";
+    import { Router } from "svelte-navigator";
+    import PrimaryRouter from "./Router/PrimaryRouter.svelte";
 </script>
 
-<main>
+<Router>
     <Header />
-    <h1>Hello Nazmul!</h1>
-</main>
-
-<style lang="scss">
-    main{
-        max-width: 800px;
-        margin: auto;
-    }
-</style>
+    <PrimaryRouter />
+    <Footer />
+</Router>

@@ -66,4 +66,26 @@ button:focus {
   border-color: #666;
 }
 
+.navigation-tab {
+  display: block;
+  padding: 10px;
+  color: black !important;
+  font-weight: 500;
+  font-size: 1.2rem;
+  border: 1px solid #cdcdcd;
+  margin: 0 !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 /*# sourceMappingURL=global.css.map */
