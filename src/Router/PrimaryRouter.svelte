@@ -5,7 +5,7 @@
 </script>
 
 <main>
-    <Route path="/" component={Homepage} />
+    <Route primary={false} path="/" component={Homepage} />
     <Route path="/add-poll/" component={About} />
 </main>
 
