@@ -18,8 +18,8 @@
             answerA: "Yes",
             answerB: "Not",
             id: "81461145-67fc-43f7-afcb-a41b86a82362",
-            voteA: 10,
-            voteB: 15,
+            voteA: 7,
+            voteB: 4,
         },
     ];
     const handleAddPoll = (e) => {
