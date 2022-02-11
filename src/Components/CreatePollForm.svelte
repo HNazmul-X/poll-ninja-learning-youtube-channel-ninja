@@ -1,12 +1,12 @@
 <script>
     import Button from "./../Shared/Button.svelte";
-    import { createEventDispatcher } from "svelte";
     import { v4 } from "uuid";
+    import { pollStores } from "../Store/pollStores";
 
     let fields = { question: "", answerA: "", answerB: "" };
     let error = { question: "", answerA: "", answerB: "" };
     let valid = false;
-    const dispatcher = createEventDispatcher()
+    export let onTabChange;
 
     const handleCreatePoll = () => {
         valid = true;
@@ -37,7 +37,8 @@
 
         if (valid) {
             const poll = { ...fields, voteA: 0, voteB: 0, id: v4() };
-            dispatcher("addPoll", poll);
+            pollStores.update((value) => [...value, poll]);
+            onTabChange("Current Polls");
         }
     };
 </script>
