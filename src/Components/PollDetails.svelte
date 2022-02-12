@@ -1,23 +1,25 @@
 <script>
     import Button from "./../Shared/Button.svelte";
     import { pollStores } from "./../Store/pollStores.js";
+    import { fly, fade } from "svelte/transition";
+    import { tweened } from "svelte/motion";
+    import { onMount } from "svelte";
 
     export let poll = {};
 
     //reactive values;
     $: totalVotes = poll.voteA + poll.voteB;
-    $: voteA = (100 / totalVotes) * poll.voteA;
-    $: voteB = (100 / totalVotes) * poll.voteB;
+    $: voteA = (100 / totalVotes) * poll.voteA || 0;
+    $: voteB = (100 / totalVotes) * poll.voteB || 0;
+
+    // animation tweends
+    const tweenedA = tweened(0);
+    const tweenedB = tweened(0);
+
+    $: tweenedA.set(voteA);
+    $: tweenedB.set(voteB);
 
     const handleVote = (option, id) => {
-        let copiedPoll = [...$pollStores];
-        let votedPoll = copiedPoll.find((p) => p.id === id);
-
-        if (option === "a") {
-            votedPoll.voteA++;
-        } else if (option === "b") {
-            votedPoll.voteB++;
-        }
         pollStores.update(() => {
             let copiedPoll = [...$pollStores];
             let votedPoll = copiedPoll.find((p) => p.id === id);
@@ -38,18 +40,18 @@
     };
 </script>
 
-<div class="poll-detail-card">
+<div in:fly={{ y: 50, duration: 500 }} out:fly|local={{ y: 50, duration: 500 }} class="poll-detail-card">
     <div class="question-top">
-        {poll?.question}
+        {poll?.question}``
         <div class="total-vote">Total : {totalVotes}</div>
     </div>
     <div class="answers">
         <div class="answer-block block-a" on:click={() => handleVote("a", poll.id)}>
-            <span style="--width:{voteA}%" class="progress {voteA > voteB ? 'heighest' : 'loweest'}" />
+            <span style="--width:{$tweenedA}%" class="progress {voteA > voteB ? 'heighest' : 'loweest'}" />
             <div class="answer">{poll?.answerA}&nbsp; &nbsp; ({poll?.voteA})</div>
         </div>
         <div class="answer-block block-b" on:click={() => handleVote("b", poll.id)}>
-            <span style="--width:{voteB}%" class="progress {voteA < voteB ? 'heighest' : 'loweest'}" />
+            <span style="--width:{$tweenedB}%" class="progress {voteA < voteB ? 'heighest' : 'loweest'}" />
             <div class="answer">{poll?.answerB}&nbsp; &nbsp; ({poll?.voteB})</div>
         </div>
     </div>

@@ -13,7 +13,7 @@
     main {
         max-width: 800px;
         margin: auto;
-        min-height: calc(100vh - 200px);
+        min-height: calc(100vh - 250px);
         padding: 2rem 0px;
         &:focus{
             outline: none;

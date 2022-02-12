@@ -28,8 +28,8 @@
                 font-weight: 500;
 
                 &.active {
-                    color: red;
-                    border-bottom: 2px solid red;
+                    color: #d91b42;
+                    border-bottom: 2px solid #d91b42;
                 }
             }
         }
